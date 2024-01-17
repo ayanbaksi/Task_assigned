@@ -1,6 +1,6 @@
 // Table.js
 import axios from 'axios';
-import styled from './table.module.scss';
+import styled from './Table.module.scss';
 import { useState, useEffect } from 'react';
 import ViewModal from '../ViewModal/ViewModal';
 
