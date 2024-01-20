@@ -1,11 +1,13 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
-
-First, run the development server:
+1.clone this project 
+2.Then navigate to the directory of the project
+3.open the terminal and type npm i or npm install 
+4.Run the development server:
 
 ```bash
-npm run dev
+npm run dev // (recommended)
 # or
 yarn dev
 # or
@@ -13,7 +15,8 @@ pnpm dev
 # or
 bun dev
 ```
-
+5.Import files for the database from the db folder and in your mongo compass import the two json. 
+refer to this link ->>> https://www.mongodb.com/docs/compass/current/import-export/
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
