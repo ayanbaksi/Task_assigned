@@ -1,0 +1,80 @@
+[{
+  "_id": {
+    "$oid": "65a6d5745521b44b2538696a"
+  },
+  "time": "2:00 PM",
+  "location": {
+    "latitude": "48.858844",
+    "longitude": "2.29435"
+  },
+  "alarm": true,
+  "is_active": true,
+  "is_deleted": false,
+  "created_at": 1705432436,
+  "updated_at": 1705432436,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65a6d5785521b44b2538696c"
+  },
+  "time": "2:00 PM",
+  "location": {
+    "latitude": "40.758896",
+    "longitude": "-73.98513"
+  },
+  "alarm": false,
+  "is_active": true,
+  "is_deleted": false,
+  "created_at": 1705432440,
+  "updated_at": 1705432440,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65a6d5855521b44b2538696e"
+  },
+  "time": "05:00 PM",
+  "location": {
+    "latitude": "-33.8568",
+    "longitude": "151.2153"
+  },
+  "alarm": true,
+  "is_active": true,
+  "is_deleted": false,
+  "created_at": 1705432453,
+  "updated_at": 1705432453,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65a6d58c5521b44b25386970"
+  },
+  "time": "12:00 PM",
+  "location": {
+    "latitude": "41.8902",
+    "longitude": "12.4924"
+  },
+  "alarm": true,
+  "is_active": true,
+  "is_deleted": false,
+  "created_at": 1705432460,
+  "updated_at": 1705432460,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65a6d5935521b44b25386972"
+  },
+  "time": "9:00 PM",
+  "location": {
+    "latitude": "40.4319",
+    "longitude": "116.5704"
+  },
+  "alarm": false,
+  "is_active": true,
+  "is_deleted": false,
+  "created_at": 1705432467,
+  "updated_at": 1705432467,
+  "__v": 0
+}]
