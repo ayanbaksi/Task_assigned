@@ -21,15 +21,17 @@ const ViewModal = ({ data, onClose }) => {
 
     return (
         <div className={styled.modalOverlay} onClick={onClose}>
-            <button style={{position:"absolute",right:'19rem',top:'9rem'}} onClick={onClose}>Close</button>
+            <button style={{ position: "absolute", right: '19rem', top: '9rem' }} onClick={onClose}>Close</button>
             <div className={styled.modalContent} onClick={handleModalContentClick}>
 
                 <div className={styled.webcam1}>
                     {!showCam2 && <button onClick={() => setShowCam2(true)}>Access Webcam1</button>}
-                    {showCam2 && <Webcam
-                        audio={false}
-                        style={{ width: '70%', height: 'auto' }}
-                    />}
+                    {showCam2 && <iframe
+                        src="https://drnvdo-deypriyan.uk1.pitunnel.com/stream.mjpg"
+                        title="iframe Example 1"
+                        width="100%"
+                        height="100%">
+                    </iframe>}
                 </div>
                 <div className={styled.webcam1}>
                     {!showCam1 && <button onClick={() => setShowCam1(true)}>Access Webcam2</button>}
