@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <style>
+    .modalOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      display: none;
+    }
+
+    .modalContent {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      max-width: 700px;
+      width: 100%;
+      text-align: center;
+      display: grid;
+      grid-template-rows: repeat(2, 1fr);
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      height: 40rem;
+      width: 80rem;
+    }
+
+    .webcam1 {
+      border: 1px solid black;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .webcam2 {
+      border: 1px solid black;
+      padding: 10px;
+      text-align: left;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .gmaps {
+      border: 1px solid black;
+      padding: 10px;
+      text-align: left;
+    }
+
+    .lat_long {
+      border: 1px solid black;
+      padding: 10px;
+      text-align: center;
+      color: green;
+    }
+
+    .table_container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .table {
+      width: 70%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .table th,
+    .table td {
+      border: 1px solid #000;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .table th {
+      background-color: #000;
+      color: #fff;
+    }
+
+    .table tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .view_button {
+      background-color: #000;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <button id="logoutBtn" type="button" style="position: absolute; right: 2rem" onclick="logout()">
+      LogOut
+    </button>
+    <h1>{{somestr}}</h1>
+    <div id="tableContainer" class="table_container">
+      <table id="dataTable" class="table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Location (Latitude and Longitude)</th>
+            <th>Alarm</th>
+            <th>View</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for data in tabledatas %}
+          <tr>
+            <td>{{ data.time }}</td>
+            <td>
+              {{ data.location.latitude }}, {{ data.location.longitude }}
+            </td>
+            <td>
+              <button id = "alarmButton" onclick="toggleAlarm('{{data.alarm}}')" style="
+            width: 5rem;
+            height: 2rem;
+            border-radius: 8px;
+            background-color: {{ 'green' if data.alarm else 'red' }};
+          "></button>
+            </td>
+            <td>
+              <button class="view_button" onclick="openModal('{{ data.location.latitude }}', '{{ data.location.longitude }}')">View</button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div id="modalOverlay" class="modalOverlay">
+        <button style="position: absolute; right: 37rem; top: 9rem; color:red;" onclick="closeModal()">
+          X
+        </button>
+        <div id="modalContent" class="modalContent">
+          <div id="webcam1" class="webcam1">
+            <button onclick="toggleWebcam1()">Access Webcam1</button>
+          </div>
+
+          <div id="webcam2" class="webcam2">
+            <button onclick="toggleWebcam2()">Access Webcam2</button>
+          </div>
+
+          <div id="gmaps" class="gmaps"></div>
+
+          <div id="lat_long" class="lat_long">
+            <h1 id="latitude"></h1>
+            <h1 id="longitude"></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../static/scripts/dashboard.js"></script>
+  <script>
+    const logout = () => {
+      sessionStorage.clear();
+      window.location.href = '/';
+    };
+  </script>
+</body>
+
+</html>

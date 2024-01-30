@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles/signup.css">
+    <title>Signup</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Signup</h1>
+        <form class="form" id="signupForm" action="{{ url_for('register') }}" method="post" enctype="multipart/form-data">
+            <label class="label">
+                Username:
+                <input class="input" type="text" id='username' name="username" required>
+            </label>
+            <br>
+            <label class="label">
+                Email:
+                <input class="input" type="email" id = 'email' name="email" required>
+            </label>
+            <br>
+            <label class="label">
+                Password:
+                <input class="input" type="password" id = 'password' name="password" required>
+            </label>
+            <br>
+            <button class="button" type="submit">Signup</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../static/scripts/signup.js"></script>
+</body>
+</html>
