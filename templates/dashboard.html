@@ -25,15 +25,15 @@
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-      max-width: 700px;
-      width: 100%;
+      /* max-width: 700px; */
+      /* width: 498em; */
       text-align: center;
       display: grid;
       grid-template-rows: repeat(2, 1fr);
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
-      height: 40rem;
-      width: 80rem;
+      height: 54rem;
+      width: 100rem;
     }
 
     .webcam1 {
@@ -110,7 +110,6 @@
     <button id="logoutBtn" type="button" style="position: absolute; right: 2rem" onclick="logout()">
       LogOut
     </button>
-    <h1>{{somestr}}</h1>
     <div id="tableContainer" class="table_container">
       <table id="dataTable" class="table">
         <thead>
@@ -129,7 +128,7 @@
               {{ data.location.latitude }}, {{ data.location.longitude }}
             </td>
             <td>
-              <button id = "alarmButton" onclick="toggleAlarm('{{data.alarm}}')" style="
+              <button id="alarmButton" onclick="toggleAlarm('{{data.alarm}}')" style="
             width: 5rem;
             height: 2rem;
             border-radius: 8px;
@@ -137,23 +136,24 @@
           "></button>
             </td>
             <td>
-              <button class="view_button" onclick="openModal('{{ data.location.latitude }}', '{{ data.location.longitude }}')">View</button>
+              <button class="view_button"
+                onclick="openModal('{{ data.location.latitude }}', '{{ data.location.longitude }}')">View</button>
             </td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
       <div id="modalOverlay" class="modalOverlay">
-        <button style="position: absolute; right: 37rem; top: 9rem; color:red;" onclick="closeModal()">
+        <button style="position: absolute; right: 0rem; top: 2rem; color:red;" onclick="closeModal()">
           X
         </button>
         <div id="modalContent" class="modalContent">
           <div id="webcam1" class="webcam1">
-            <button onclick="toggleWebcam1()">Access Webcam1</button>
+            <button onclick="toggleWebcam1()">Video Call</button>
           </div>
 
           <div id="webcam2" class="webcam2">
-            <button onclick="toggleWebcam2()">Access Webcam2</button>
+            <button onclick="toggleWebcam2()">Access Drone CAM</button>
           </div>
 
           <div id="gmaps" class="gmaps"></div>

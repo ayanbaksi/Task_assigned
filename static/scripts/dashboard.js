@@ -49,9 +49,10 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         const toggleWebcam1 = () => {
-            webcam1.innerHTML = "<video id='videoCam' style='height:250px;width:100%;'></video>";
-            openCam();
+            window.location = '/meeting'
         };
+        
+        
 
         const toggleWebcam2 = () => {
             const webcam2 = document.getElementById('webcam2');

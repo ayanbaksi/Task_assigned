@@ -12,9 +12,11 @@ db = client["task"]
 users_collection = db["users"]
 collection = db["tabledatas"]
 SECRET_KEY = "qwerty123"
-
+cur_username = ""
 @app.route('/api/checkuser', methods=['POST'])
 def checkuser():
+    global cur_username  # Use the global variable
+
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
@@ -23,19 +25,24 @@ def checkuser():
         user_data = users_collection.find_one(user)
 
         if user_data is not None:
-            hashed_password = user_data.get("password", "")
-            if bcrypt.checkpw(password.encode('utf-8'), hashed_password.encode('utf-8')):
+                hashed_password = user_data.get("password", "")
+                if bcrypt.checkpw(password.encode('utf-8'), hashed_password.encode('utf-8')):
+                    # Update the global variable with the current username
+                    cur_username = user_data.get("username", "")
+                    print("Current username:", cur_username)  # Add this line for debugging
+
+
                 # Generate JWT token
                 token_payload = {
                     'email': email,
                     'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1)
                 }
                 jwt_token = jwt.encode(token_payload, SECRET_KEY, algorithm='HS256')
-
+                
                 # Return response with JWT token and user information
                 return jsonify({
                     "is_logged_in": True,
-                    "name": user_data.get("username", ""),
+                    "name": cur_username,  # Use the current username
                     "token": jwt_token
                 })
         return jsonify({"is_logged_in": False, "message": "Invalid credentials"})
@@ -76,7 +83,7 @@ def dashboard():
         tabledatas = list(collection.find())
         for data in tabledatas:
             data['_id'] = str(data['_id'])
-        print(tabledatas)
+        # print(tabledatas)
         return render_template('dashboard.html', tabledatas=tabledatas)
 
     except Exception as e:
@@ -89,6 +96,12 @@ def signup():
 @app.route('/login')
 def login():
     return render_template('login.html')
+@app.route("/meeting")
+def meeting():
+    global cur_username  # Use the global variable
+    print(cur_username)  # Print the current username for debugging
+    return render_template("meeting.html", username=cur_username)
+
 
 @app.route('/api/tabledatas', methods=['GET'])
 def get_tabledatas():
@@ -111,6 +124,12 @@ def get_users():
         return jsonify({"users": users})
     except Exception as e:
         return jsonify({"error": str(e)})
+@app.route("/join", methods=["GET", "POST"])
+def join():
+    if request.method == "POST":
+        room_id = request.form.get("roomID")
+        return redirect(f"/meeting?roomID={room_id}")
 
+    return render_template("join.html")
 if __name__ == '__main__':
     app.run(debug=True)
