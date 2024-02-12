@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         const modalOverlay = document.getElementById('modalOverlay');
         const modalContent = document.getElementById('modalContent');
-        const latitudeElement = document.getElementById('latitude');
-        const longitudeElement = document.getElementById('longitude');
+        // const latitudeElement = document.getElementById('latitude');
+        // const longitudeElement = document.getElementById('longitude');
         const gmaps = document.getElementById('gmaps'); // Add this line
         const alarmButton = document.getElementById('alarmButton');
         const webcam1 = document.getElementById('webcam1');
@@ -21,16 +21,28 @@ document.addEventListener('DOMContentLoaded', function () {
         };
         const updateGoogleMap = () => {
             const apiKey = "AIzaSyAJrVwfXdMdPHX2bLxXpQyZaczi1XvRx2o";
-            const latitude = selectedData.location.latitude;
-            const longitude = selectedData.location.longitude;
-            const googleMapUrl = `https://www.google.com/maps/embed/v1/view?key=${apiKey}&center=${latitude},${longitude}&zoom=15`;
-            gmaps.innerHTML = googleMapUrl ? `<iframe width="100%" height="100%" style="border: 0" src="${googleMapUrl}" allowFullScreen></iframe>` : '';
+            
+            // Get the current location using Geolocation API
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    const googleMapUrl = `https://www.google.com/maps/embed/v1/view?key=${apiKey}&center=${latitude},${longitude}&zoom=15`;
+                    
+                    // Update the gmaps element with the Google Maps iframe
+                    gmaps.innerHTML = googleMapUrl ? `<iframe width="100%" height="100%" style="border: 0" src="${googleMapUrl}" allowfullscreen></iframe>` : '';
+                },
+                () => {
+                    // Handle errors here
+                    alert("Error: The Geolocation service failed.");
+                }
+            );
         };
 
         const openModal = (lat, long) => {
             console.log("first", lat, "  ", long);
             modalOverlay.style.display = 'flex';
-            selectedData = { location: { latitude: lat, longitude: long } };
+            // selectedData = { location: { latitude: lat, longitude: long } };
             updateModalContent();
             updateGoogleMap();
         };
@@ -44,12 +56,23 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         const updateModalContent = () => {
-            latitudeElement.textContent = `Latitude: ${selectedData.location.latitude}`;
-            longitudeElement.textContent = `Longitude: ${selectedData.location.longitude}`;
+            console.log("first")
+            // latitudeElement.textContent = `Latitude: ${selectedData.location.latitude}`;
+            // longitudeElement.textContent = `Longitude: ${selectedData.location.longitude}`;
         };
 
         const toggleWebcam1 = () => {
-            window.location = '/meeting'
+            // window.location = '/meeting'
+            const webcam1 = document.getElementById('webcam1');
+            const iframeCode = `
+                <iframe
+                    src='/meeting'
+                    title='iframe Example 1'
+                    width='100%'
+                    height='100%'>
+                </iframe>
+            `;
+            webcam1.innerHTML = iframeCode;
         };
         
         
@@ -58,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const webcam2 = document.getElementById('webcam2');
             const iframeCode = `
                 <iframe
-                    src='https://drnvdo-deypriyan.uk1.pitunnel.com/stream.mjpg'
+                    src='http://127.0.0.1:8080/'
                     title='iframe Example 1'
                     width='100%'
                     height='100%'>
